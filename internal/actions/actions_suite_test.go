@@ -177,7 +177,7 @@ func (client mockClient) GetContainer(containerID string) (container.Container, 
 	return container.Container{}, nil
 }
 
-func (client mockClient) ExecuteCommand(containerID string, command string) error {
+func (client mockClient) ExecuteCommand(containerID string, command string, timeout int) error {
 	return nil
 }
 
