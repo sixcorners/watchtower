@@ -66,7 +66,6 @@ func stopStaleContainer(container container.Container, client container.Client, 
 	}
 
 	executePreUpdateCommand(client, container)
-	log.Info(client)
 	if err := client.StopContainer(container, params.Timeout); err != nil {
 		log.Error(err)
 	}
