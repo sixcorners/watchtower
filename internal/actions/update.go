@@ -65,7 +65,11 @@ func stopStaleContainer(container container.Container, client container.Client, 
 		return
 	}
 
-	executePreUpdateCommand(client, container)
+	if err := executePreUpdateCommand(client, container); err != nil {
+		log.Error(err)
+		log.Info("Skipping container as the pre-update command failed")
+		return
+	}
 	if err := client.StopContainer(container, params.Timeout); err != nil {
 		log.Error(err)
 	}
@@ -174,23 +178,21 @@ func executePostCheckCommand(client container.Client, container container.Contai
 	}
 }
 
-func executePreUpdateCommand(client container.Client, container container.Container) {
+func executePreUpdateCommand(client container.Client, container container.Container) error {
 
 	command := container.GetLifecyclePreUpdateCommand()
 	timeout := container.PreUpdateTimeout()
 
 	if len(command) == 0 {
 		log.Debug("No pre-update command supplied. Skipping")
-		return
+		return nil
 	}
 
 	log.Info("Executing pre-update command.")
 
 
-	if err := client.ExecuteCommand(container.ID(), command, timeout); err != nil {
-		log.Error(err)
-	}
-
+	err := client.ExecuteCommand(container.ID(), command, timeout)
+	return err
 }
 
 func executePostUpdateCommand(client container.Client, newContainerID string) {
