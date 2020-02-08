@@ -31,7 +31,6 @@ type Client interface {
 	IsContainerStale(Container) (bool, error)
 	ExecuteCommand(containerID string, command string) error
 	RemoveImageByID(string) error
-
 }
 
 // NewClient returns a new Client instance which can be used to interact with

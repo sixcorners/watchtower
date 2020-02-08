@@ -34,7 +34,7 @@ var _ = Describe("the actions package", func() {
 		removeVolumes := false
 
 		client = CreateMockClient(
-			&TestData {},
+			&TestData{},
 			dockerClient,
 			pullImages,
 			removeVolumes,
@@ -131,4 +131,3 @@ var _ = Describe("the actions package", func() {
 		})
 	})
 })
-
