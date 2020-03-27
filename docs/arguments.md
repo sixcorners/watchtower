@@ -119,7 +119,7 @@ Environment Variable: WATCHTOWER_REVIVE_STOPPED
 ```   
 
 ## Poll interval
-Poll interval (in seconds). This value controls how frequently watchtower will poll for new images.
+Poll interval (in seconds). This value controls how frequently watchtower will poll for new images. Either `--schedule` or a poll interval could be defined, but not both.
 
 ```
             Argument: --interval, -i
